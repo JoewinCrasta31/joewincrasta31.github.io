@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joewin Crasta — Multimedia</title>
+<meta name="description" content="Joewin Crasta — Multimedia Executive. Photography, videography, AI video production & post-production, based in Sharjah, UAE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:      #14120F;
+    --bg-2:    #1B1814;
+    --fg:      #F0EBE1;
+    --muted:   #948C7C;
+    --line:    #3A362E;
+    --amber:   #E8A33D;
+    --rec:     #C4432B;
+    --paper:   #EFE7D8;
+
+    --display: 'Bebas Neue', sans-serif;
+    --mono:    'IBM Plex Mono', monospace;
+    --body:    'Inter', sans-serif;
+
+    --wrap: 1120px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  ::selection{ background:var(--amber); color:#14120F; }
+
+  :focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* film-grain texture, subtle, fixed */
+  .grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ NAV ============ */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(20,18,15,.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .navname{
+    font-family:var(--mono); font-size:13px; letter-spacing:.06em;
+    color:var(--fg);
+  }
+  .navname b{ color:var(--amber); font-weight:500; }
+
+  .rec{
+    display:flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12px; color:var(--muted);
+    letter-spacing:.05em;
+  }
+  .rec .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--rec);
+    animation:blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.25;} }
+
+  nav.links{ display:flex; gap:28px; }
+  nav.links a{
+    font-family:var(--mono); font-size:12px; letter-spacing:.06em;
+    color:var(--muted); text-transform:uppercase;
+    padding:4px 0; border-bottom:1px solid transparent;
+    transition:color .2s, border-color .2s;
+  }
+  nav.links a:hover{ color:var(--amber); border-color:var(--amber); }
+
+  @media (max-width:720px){
+    .rec{ display:none; }
+    nav.links{ gap:18px; }
+  }
+  @media (max-width:520px){
+    nav.links a:nth-child(2){ display:none; }
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:64px;
+    position:relative;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em;
+    color:var(--amber); text-transform:uppercase;
+    margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:22px; height:1px; background:var(--amber);
+  }
+
+  h1.name{
+    font-family:var(--display);
+    font-size:clamp(64px, 12vw, 148px);
+    line-height:.92;
+    letter-spacing:.01em;
+    color:var(--fg);
+  }
+  h1.name span{ color:var(--amber); }
+
+  .role{
+    font-family:var(--mono);
+    font-size:clamp(13px, 1.6vw, 16px);
+    color:var(--muted);
+    letter-spacing:.03em;
+    margin-top:18px;
+    max-width:640px;
+  }
+
+  .gearlist{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:36px;
+  }
+  .gearlist span{
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em;
+    color:var(--fg);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:2px;
+    background:var(--bg-2);
+  }
+
+  .scrollcue{
+    position:absolute; bottom:36px; left:32px;
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+    letter-spacing:.05em;
+  }
+  .scrollcue .bar{
+    width:1px; height:40px; background:var(--line);
+    position:relative; overflow:hidden;
+  }
+  .scrollcue .bar::after{
+    content:''; position:absolute; top:0; left:0; width:100%; height:12px;
+    background:var(--amber);
+    animation:travel 1.8s ease-in-out infinite;
+  }
+  @keyframes travel{ 0%{ top:-12px; } 100%{ top:40px; } }
+
+  /* frame counter, corner */
+  .framecount{
+    position:absolute; top:80px; right:32px;
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    letter-spacing:.05em; text-align:right;
+  }
+  .framecount b{ color:var(--fg); font-weight:500; }
+  @media (max-width:720px){ .framecount{ display:none; } }
+
+  /* ============ SCENE HEADERS ============ */
+  .scene-tag{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:48px;
+  }
+  .scene-tag .num{
+    font-family:var(--mono); font-size:12px; color:var(--amber);
+    letter-spacing:.05em;
+  }
+  .scene-tag h2{
+    font-family:var(--display);
+    font-size:clamp(30px,4vw,42px);
+    letter-spacing:.02em;
+    color:var(--fg);
+  }
+  .scene-tag .rule{
+    flex:1; height:1px; background:var(--line);
+  }
+
+  section{ padding:110px 0; border-bottom:1px solid var(--line); }
+
+  /* ============ ABOUT ============ */
+  .about-grid{
+    display:grid; grid-template-columns:280px 1fr; gap:64px;
+  }
+  @media (max-width:820px){ .about-grid{ grid-template-columns:1fr; gap:36px; } }
+
+  .slate{
+    aspect-ratio:4/5;
+    background:
+      repeating-linear-gradient(135deg, var(--bg-2) 0 14px, #201C16 14px 28px);
+    border:1px solid var(--line);
+    position:relative;
+    display:flex; align-items:flex-end;
+  }
+  .slate .tab{
+    width:100%;
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    padding:12px 14px; letter-spacing:.04em;
+    background:rgba(20,18,15,.7);
+    border-top:1px solid var(--line);
+  }
+  .slate .tab b{ color:var(--paper); display:block; font-size:12px; margin-bottom:4px; }
+
+  .about-copy p{ color:var(--fg); font-size:16.5px; margin-bottom:18px; max-width:600px; }
+  .about-copy p.lede{
+    font-size:20px; color:var(--paper); font-weight:500;
+  }
+  .about-copy .stats{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px;
+    margin-top:36px; max-width:520px;
+  }
+  .about-copy .stats div{ border-left:1px solid var(--amber); padding-left:14px; }
+  .about-copy .stats .k{ font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
+  .about-copy .stats .v{ font-size:15px; margin-top:4px; color:var(--fg); }
+
+  /* ============ SERVICES ============ */
+  .servicelist{ border-top:1px solid var(--line); }
+  .service{
+    display:grid; grid-template-columns:64px 1fr 1fr;
+    gap:24px; align-items:start;
+    padding:28px 0; border-bottom:1px solid var(--line);
+  }
+  .service .no{
+    font-family:var(--mono); font-size:13px; color:var(--amber);
+    letter-spacing:.05em; padding-top:4px;
+  }
+  .service h3{
+    font-family:var(--display); font-size:26px; letter-spacing:.01em;
+  }
+  .service p{ color:var(--muted); font-size:14.5px; max-width:440px; }
+  @media (max-width:720px){
+    .service{ grid-template-columns:40px 1fr; }
+    .service p{ grid-column:2; }
+  }
+
+  /* ============ WORK ============ */
+  .workgrid{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:720px){ .workgrid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--bg);
+    padding:34px;
+    display:flex; flex-direction:column; min-height:280px;
+    transition:background .25s;
+  }
+  .card:hover{ background:var(--bg-2); }
+  .card .tag{
+    font-family:var(--mono); font-size:11px; color:var(--amber);
+    letter-spacing:.06em; text-transform:uppercase; margin-bottom:14px;
+  }
+  .card h3{
+    font-family:var(--display); font-size:28px; letter-spacing:.01em; margin-bottom:12px;
+  }
+  .card p{ color:var(--muted); font-size:14.5px; flex:1; }
+  .card .go{
+    font-family:var(--mono); font-size:12px; color:var(--fg);
+    margin-top:18px; display:inline-flex; align-items:center; gap:8px;
+  }
+  .card .go::after{ content:'→'; transition:transform .2s; }
+  .card:hover .go::after{ transform:translateX(4px); }
+
+  .card.placeholder{
+    border:1px dashed var(--line);
+    background:transparent;
+    justify-content:center; align-items:center; text-align:center;
+  }
+  .card.placeholder .tag{ margin-bottom:8px; }
+  .card.placeholder p{ flex:none; color:var(--muted); }
+
+  /* ============ CONTACT ============ */
+  .contact{ text-align:left; }
+  .contact .big{
+    font-family:var(--display);
+    font-size:clamp(38px,7vw,80px);
+    letter-spacing:.01em;
+    display:inline-block;
+    border-bottom:2px solid var(--amber);
+    padding-bottom:6px;
+    transition:opacity .2s;
+  }
+  .contact .big:hover{ opacity:.75; }
+
+  .socials{ display:flex; gap:28px; margin-top:40px; flex-wrap:wrap; }
+  .socials a{
+    font-family:var(--mono); font-size:13px; letter-spacing:.04em;
+    color:var(--muted); border-bottom:1px solid transparent;
+    padding-bottom:3px; transition:color .2s, border-color .2s;
+  }
+  .socials a:hover{ color:var(--amber); border-color:var(--amber); }
+
+  footer{
+    padding:32px 0 60px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    letter-spacing:.04em;
+  }
+  @media (max-width:520px){ footer{ flex-direction:column; gap:10px; text-align:center; } }
+
+  /* scroll reveal */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .rec .dot, .scrollcue .bar::after{ animation:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="wrap navrow">
+    <div class="navname"><b>JOEWIN</b> CRASTA</div>
+    <div class="rec"><span class="dot"></span> REC <span id="tally">00:00:00</span></div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" style="border-bottom:1px solid var(--line); padding-bottom:0;">
+    <div class="wrap">
+      <div class="eyebrow">Multimedia Executive — Sharjah, UAE</div>
+      <h1 class="name">JOEWIN<br><span>CRASTA</span></h1>
+      <p class="role">Photography · Videography · AI Video Production · Post-Production — telling brand stories frame by frame, for screens people actually stop scrolling for.</p>
+      <div class="gearlist">
+        <span>Premiere Pro</span>
+        <span>Photoshop</span>
+        <span>CapCut AI</span>
+        <span>Kling AI</span>
+        <span>Runway AI</span>
+      </div>
+    </div>
+    <div class="framecount">FRAME <b id="framenum">0001</b><br>UAE / 2026</div>
+    <div class="scrollcue"><div class="bar"></div> SCROLL</div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="scene-tag reveal">
+        <span class="num">SCENE 01</span>
+        <h2>About</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="about-grid reveal">
+        <div class="slate">
+          <div class="tab">
+            <b>REPLACE THIS BLOCK</b>
+            Swap for a portrait or behind-the-scenes still — edit the .slate div in the HTML.
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="lede">I make images and video move people — then figure out what to do next with the data behind that.</p>
+          <p>I started on the numbers side of things — a Bachelor of Commerce, then a run in clerical and accounting work at a financial cooperative in India — before crossing over into multimedia. That background still shapes how I work: structured, deadline-literate, and comfortable owning a project end to end.</p>
+          <p>Today I'm a Multimedia Executive at Babygrow FZC in Sharjah's Al Hamriyah Free Zone, working across photography, videography, AI-assisted video production, and post-production.</p>
+          <div class="stats">
+            <div><div class="k">Based in</div><div class="v">Ajman / Sharjah, UAE</div></div>
+            <div><div class="k">Focus</div><div class="v">Photo · Video · AI Production</div></div>
+            <div><div class="k">Tools</div><div class="v">Premiere, Photoshop, CapCut&nbsp;AI</div></div>
+            <div><div class="k">Role</div><div class="v">Multimedia Executive, Babygrow FZC</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section id="services">
+    <div class="wrap">
+      <div class="scene-tag reveal">
+        <span class="num">SCENE 02</span>
+        <h2>Services</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="servicelist reveal">
+        <div class="service">
+          <div class="no">01</div>
+          <h3>Photography</h3>
+          <p>Product, portrait, and brand photography shot for how it'll actually be used — feed, ads, or print.</p>
+        </div>
+        <div class="service">
+          <div class="no">02</div>
+          <h3>Videography</h3>
+          <p>Short-form and campaign video, shot and directed with the edit already in mind.</p>
+        </div>
+        <div class="service">
+          <div class="no">03</div>
+          <h3>AI Video Production</h3>
+          <p>AI-assisted video using Kling AI, Runway, and CapCut AI — for fast turnarounds and concepts that don't need a full shoot.</p>
+        </div>
+        <div class="service">
+          <div class="no">04</div>
+          <h3>Post-Production</h3>
+          <p>Editing, grading, and finishing in Premiere Pro and Photoshop — from raw footage to a polished final cut.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section id="work">
+    <div class="wrap">
+      <div class="scene-tag reveal">
+        <span class="num">SCENE 03</span>
+        <h2>Selected Work</h2>
+        <div class="rule"></div>
+      </div>
+
+      <div class="workgrid reveal">
+        <div class="card">
+          <div class="tag">Music Project</div>
+          <h3>JMusix31</h3>
+          <p>An independent Hindi music project — Dil Notes Studio — built around a YouTube channel, from release visuals to promotion.</p>
+          <span class="go">View project</span>
+        </div>
+
+        <div class="card">
+          <div class="tag">Multimedia</div>
+          <h3>Babygrow FZC</h3>
+          <p>Multimedia Executive handling photography, videography, AI-assisted video production and post-production for the brand.</p>
+          <span class="go">View reel</span>
+        </div>
+
+        <div class="card placeholder">
+          <div class="tag">+ Add a project</div>
+          <p>Duplicate a .card block in the HTML for each new shoot, edit, or campaign you want to feature.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="scene-tag reveal">
+        <span class="num">SCENE 04</span>
+        <h2>Contact</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="contact reveal">
+        <a class="big" href="mailto:you@example.com">you@example.com</a>
+        <div class="socials">
+          <a href="#" target="_blank" rel="noopener">Instagram — @yourhandle</a>
+          <a href="#" target="_blank" rel="noopener">YouTube — JMusix31</a>
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 JOEWIN CRASTA</span>
+    <span>SHARJAH, UAE — BUILT ON GITHUB PAGES</span>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold:.15 });
+  els.forEach(el=>io.observe(el));
+
+  // rec tally timer
+  let secs = 0;
+  const tally = document.getElementById('tally');
+  setInterval(()=>{
+    secs++;
+    const h = String(Math.floor(secs/3600)).padStart(2,'0');
+    const m = String(Math.floor((secs%3600)/60)).padStart(2,'0');
+    const s = String(secs%60).padStart(2,'0');
+    tally.textContent = `${h}:${m}:${s}`;
+  }, 1000);
+
+  // frame counter, ticks up while scrolling
+  let frame = 1;
+  const framenum = document.getElementById('framenum');
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      frame += Math.floor(Math.random()*3)+1;
+      framenum.textContent = String(frame).padStart(4,'0');
+      ticking = true;
+      setTimeout(()=>{ ticking = false; }, 120);
+    }
+  });
+</script>
+
+</body>
+</html>
